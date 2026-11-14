@@ -1,0 +1,23 @@
+{
+  "version": "beta0.1.0",
+  "published_at": "2026-11-15",
+  "title": "WonderBot beta0.1.0 已发布",
+  "content": "首个预发布版本：品牌与更新源自有化、深黑主题、成本审查、长期记忆、QQ 发送者白名单。",
+  "level": "info",
+  "notices": [
+    {
+      "id": "beta0.1.0",
+      "version": "beta0.1.0",
+      "title": "WonderBot beta0.1.0 已发布",
+      "content": "首个预发布版本，包含完整源码、安装脚本、中文文档与官网源码。首次使用请在 data/cmd_config.json 的 wonderbot_sender_allowlist.qq_ids 填入允许的 QQ 号。",
+      "level": "info",
+      "published_at": "2026-11-15"
+    }
+  ],
+  "links": {
+    "repository": "https://github.com/2997669349awa-blip/wonderBot",
+    "website": "https://2997669349awa-blip.github.io/wonderBot/",
+    "releases": "https://github.com/2997669349awa-blip/wonderBot/releases/tag/beta0.1.0",
+    "docs": "https://github.com/2997669349awa-blip/wonderBot/blob/main/WONDERBOT.md"
+  }
+}
