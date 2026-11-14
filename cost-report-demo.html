@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>WonderBot 成本审查</title><style>
+:root{color-scheme:dark}body{margin:0;padding:32px;background:#08080a;color:#e8e8ec;
+font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:16px;margin:32px 0 12px;color:#9aa0aa}
+.sub{color:#7b808a;margin-bottom:24px}.cards{display:flex;gap:14px;flex-wrap:wrap}
+.card{background:#121216;border:1px solid #26262e;border-radius:12px;padding:16px 22px;min-width:150px}
+.card b{display:block;font-size:24px;color:#5ee0c8;margin-top:6px}
+.card span{color:#8b909a;font-size:12px}
+table{width:100%;border-collapse:collapse;background:#101014;border:1px solid #26262e;border-radius:12px;overflow:hidden}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid #1e1e26;font-size:13px}
+th{background:#18181e;color:#9aa0aa;font-weight:500}tr:last-child td{border-bottom:0}
+.cost{color:#5ee0c8;font-variant-numeric:tabular-nums}.warn{color:#ffb454}
+.empty{text-align:center;color:#6b707a;padding:28px}code{color:#8ab4f8}
+</style></head><body>
+<h1>WonderBot · 成本审查</h1>
+<div class="sub"><b style="color:#ffb454">示例数据（演示用，非真实账本）</b><br>逐次记录每次大模型调用的 token 与费用 · 单价表 <code>wonderbot_pricing.json</code> 可自行修改</div>
+<div class="cards">
+<div class="card"><span>累计调用</span><b>6</b></div>
+<div class="card"><span>输入 token</span><b>7,200</b></div>
+<div class="card"><span>输出 token</span><b>2,050</b></div>
+<div class="card"><span>累计费用</span><b>¥0.0941</b></div>
+<div class="card"><span>未匹配单价</span><b>1</b></div>
+</div>
+<h2>按模型汇总</h2><table><thead><tr><th>模型</th><th>调用数</th><th>输入</th><th>输出</th><th>费用</th></tr></thead><tbody><tr><td>claude-sonnet-4</td><td>1</td><td>900</td><td>400</td><td class="cost">¥0.063800</td></tr>
+<tr><td>qwen-plus</td><td>1</td><td>2,300</td><td>640</td><td class="cost">¥0.016880</td></tr>
+<tr><td>gemini-2.5-flash</td><td>1</td><td>1,500</td><td>380</td><td class="cost">¥0.006644</td></tr>
+<tr><td>deepseek-chat</td><td>1</td><td>1,200</td><td>320</td><td class="cost">¥0.004960</td></tr>
+<tr><td>gpt-4o-mini</td><td>1</td><td>800</td><td>210</td><td class="cost">¥0.001804</td></tr>
+<tr><td>unknown-x</td><td>1</td><td>500</td><td>100</td><td class="cost">¥0.000000</td></tr></tbody></table>
+<h2>逐次调用明细（最近 20 条）</h2><table><thead><tr><th>时间</th><th>用户</th><th>模型</th><th>输入</th><th>缓存命中</th><th>输出</th><th>耗时 ms</th><th>本次费用</th><th>备注</th></tr></thead><tbody><tr><td>2026-11-15 01:08:54</td><td>999</td><td>gemini-2.5-flash</td><td>1,500</td><td>0</td><td>380</td><td>1,350</td><td class="cost">¥0.006644</td><td></td></tr>
+<tr><td>2026-11-15 01:08:54</td><td>999</td><td>claude-sonnet-4</td><td>900</td><td>0</td><td>400</td><td>1,350</td><td class="cost">¥0.063800</td><td></td></tr>
+<tr><td>2026-11-15 01:08:54</td><td>999</td><td>unknown-x</td><td>500</td><td>0</td><td>100</td><td>1,350</td><td class="cost">¥0.000000</td><td><span class=warn>未配置单价</span></td></tr>
+<tr><td>2026-11-15 01:08:54</td><td>999</td><td>qwen-plus</td><td>2,300</td><td>0</td><td>640</td><td>1,350</td><td class="cost">¥0.016880</td><td></td></tr>
+<tr><td>2026-11-15 01:08:54</td><td>999</td><td>gpt-4o-mini</td><td>800</td><td>0</td><td>210</td><td>1,350</td><td class="cost">¥0.001804</td><td></td></tr>
+<tr><td>2026-11-15 01:08:54</td><td>123456789</td><td>deepseek-chat</td><td>1,200</td><td>0</td><td>320</td><td>1,350</td><td class="cost">¥0.004960</td><td></td></tr></tbody></table>
+</body></html>

@@ -1,0 +1,48 @@
+version: '3.8'
+
+# 当接入 QQ NapCat 时，请使用这个 compose 文件一键部署: https://github.com/2997669349awa-blip/wonderBot/tree/main/docs/deploy/napcat
+
+services:
+  wonderbot:
+    image: wonderbotdevs/wonderbot:latest
+    container_name: wonderbot
+    restart: always
+    ports: # mappings description: https://github.com/2997669349awa-blip/wonderBot/issues/497
+      - "6185:6185" # 必选，WonderBot WebUI 端口
+      - "6199:6199" # 可选, QQ 个人号 WebSocket 端口
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ${PWD}/data:/WonderBot/data
+      # - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - wonderbot_network
+
+  shipyard:
+    image: wonderbotdevs/shipyard-bay:latest
+    container_name: wonderbot_shipyard
+    # ports:
+    #   - "8156:8156"
+    environment:
+      - PORT=8156
+      - DATABASE_URL=sqlite+aiosqlite:///./data/bay.db
+      - ACCESS_TOKEN=secret-token
+      - MAX_SHIP_NUM=10
+      - BEHAVIOR_AFTER_MAX_SHIP=reject
+      - DOCKER_IMAGE=wonderbotdevs/shipyard-ship:latest
+      - DOCKER_NETWORK=wonderbot_network
+      - SHIP_DATA_DIR=${PWD}/data/shipyard/ship_mnt_data
+      - DEFAULT_SHIP_CPUS=1.0
+      - DEFAULT_SHIP_MEMORY=512m
+    volumes:
+      - ${PWD}/data/shipyard/bay_data:/app/data
+      - ${PWD}/data/temp:/WonderBot/data/temp           # Bind the local temp directory to the sandbox so that the uploaded file can be accessed in the sandbox
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - wonderbot_network
+
+networks:
+  wonderbot_network:
+    name: wonderbot_network
+    driver: bridge
