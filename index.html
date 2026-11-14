@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WonderBot · 面向 QQ 群与私域场景的开源智能助手</title>
+<meta name="description" content="WonderBot 是基于 AstrBot 能力 fork 的独立衍生发行版，面向 QQ 群与私域场景，内置逐次成本审查、长期记忆与 QQ 发送者白名单，深黑主题 WebUI，自有更新源，默认不外发遥测。AGPL-3.0-or-later 开源。">
+<meta name="theme-color" content="#08080b">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="WonderBot 首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="34" height="34">
+          <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#6ff2d6"/><stop offset="1" stop-color="#3aa8ff"/>
+          </linearGradient></defs>
+          <path d="M6 12 L11 29 L20 17 L29 29 L34 12" fill="none" stroke="url(#bg)"
+                stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20" cy="9" r="2.4" fill="#6ff2d6"/>
+        </svg>
+      </span>
+      <span class="brand-name">WonderBot</span>
+      <span class="brand-ver">beta0.1.0</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="展开导航" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">特性</a>
+      <a href="#why">定位</a>
+      <a href="#start">快速开始</a>
+      <a href="#cost">成本审查</a>
+      <a href="#roadmap">路线</a>
+      <a href="#faq">常见问题</a>
+      <a class="nav-cta" href="#download">下载</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="badge"><i class="dot"></i> beta0.1.0 · 预发布版本</span>
+        <h1>Wonder<span>Bot</span></h1>
+        <p class="lead">面向 QQ 群与私域场景的<br>开源智能助手发行版</p>
+        <p class="hero-desc">
+          通用框架解决「能不能接进来」，WonderBot 解决「敢不敢长期跑」：
+          每一次大模型调用花多少钱、每个用户说过什么、谁有资格下命令，三件事全部落到本地、可查、可审计。
+          基于 AstrBot 能力 fork 的独立衍生版本，AGPL-3.0-or-later 完整开源。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#download">下载 beta0.1.0</a>
+          <a class="btn btn-ghost" href="https://github.com/2997669349awa-blip/wonderBot">查看源码</a>
+        </div>
+        <ul class="hero-meta">
+          <li>Python 3.12+</li><li>AGPL-3.0-or-later</li>
+          <li>独立衍生项目</li><li>100% 源码开放</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual" aria-label="运行示意">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="tdot d1"></span><span class="tdot d2"></span><span class="tdot d3"></span>
+            <span class="terminal-title">wonderbot · 启动日志</span>
+          </div>
+          <pre><code><span class="c-dim">$</span> ./install.sh &amp;&amp; .venv/bin/python main.py
+
+<span class="c-ok">[OK]</span> 品牌配置        WonderBot / beta0.1.0
+<span class="c-ok">[OK]</span> 发送者白名单    已加载 2 个 QQ 号
+<span class="c-ok">[OK]</span> 长期记忆        sqlite 就绪
+<span class="c-ok">[OK]</span> 成本账本        单价表 12 条
+<span class="c-warn">[--]</span> 更新检查        已禁用（未配置自有发布源）
+<span class="c-warn">[--]</span> 匿名统计        默认不外发
+<span class="c-ok">[OK]</span> WebUI           http://127.0.0.1:6185</code></pre>
+        </div>
+        <div class="cost-card">
+          <div class="cost-head"><span>本次调用成本</span><span class="cost-tag">实时记账</span></div>
+          <div class="cost-model">deepseek-chat</div>
+          <div class="cost-line"><span>输入 1,200 · 输出 320 token</span><b>¥0.003840</b></div>
+          <div class="cost-bar"><i style="width:38%"></i></div>
+          <div class="cost-foot">逐次明细与按模型汇总可导出 HTML 审查报表</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div><b>9</b><span>项定制能力</span></div>
+      <div><b>0</b><span>对外遥测上报</span></div>
+      <div><b>1000+</b><span>兼容插件生态</span></div>
+      <div><b>100%</b><span>源码开放</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FEATURES</span>
+        <h2>把三件要紧的事做实</h2>
+        <p>不做「又一个全平台框架」。WonderBot 在通用底座之上，只补长期运营真正绕不开的能力。</p>
+      </div>
+      <div class="feature-grid">
+        <article class="card reveal">
+          <div class="ico ico-cyan">¥</div>
+          <h3>逐次成本审查</h3>
+          <p>每次大模型调用记录模型、普通输入 / 缓存命中 / 输出 token、耗时与费用，写入本地 SQLite。单价表可编辑，未匹配单价按 0 计费并明确标注，绝不虚报。</p>
+          <span class="card-tag">astrbot/core/wonderbot/cost.py</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-blue">M</div>
+          <h3>长期记忆</h3>
+          <p>按 QQ 号与会话两个维度持久化画像、事实与对话摘要；系统提示词组装时自动召回注入。重复内容只累加权重，不产生冗余条目，支持按范围清除。</p>
+          <span class="card-tag">astrbot/core/wonderbot/memory.py</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-violet">#</div>
+          <h3>QQ 发送者白名单</h3>
+          <p>按发送者 QQ 号放行，非白名单用户的事件在进入插件与大模型之前即终止，因此不产生任何 token 消耗。默认名单为空即拒绝全部 QQ 命令，安全优先。</p>
+          <span class="card-tag">SenderAllowlistStage</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-cyan">◐</div>
+          <h3>深黑主题 WebUI</h3>
+          <p>深 / 浅两套配色统一改为纯黑系（背景 #08080b、面板 #121218、青色强调 #5ee0c8），强制默认深色、不跟随系统；新图标、favicon 与产品名同步替换。</p>
+          <span class="card-tag">dashboard/src/theme</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-blue">↻</div>
+          <h3>自有更新源</h3>
+          <p>版本检查、核心包与 WebUI 包地址全部集中到一处配置；未配置自有发布源时更新检查直接禁用，不会连接任何上游官方服务，也不会误报官方新版本。</p>
+          <span class="card-tag">brand.py · 默认禁用</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-violet">⊘</div>
+          <h3>默认零遥测</h3>
+          <p>上游默认开启的匿名统计在衍生版中默认关闭，不再定时向外部上报，也不生成持久安装 ID。聊天内容始终留在自己的服务器。</p>
+          <span class="card-tag">WONDERBOT_DISABLE_METRICS=1</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-cyan">W</div>
+          <h3>独立品牌</h3>
+          <p>产品名、图标、首次运行声明、EULA、文档、WebUI 文案、公告地址、部署镜像名与对外链接全部替换为自有标识，避免与上游产生品牌混淆。</p>
+          <span class="card-tag">WonderBot / 独立标识</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-blue">⌘</div>
+          <h3>插件生态兼容</h3>
+          <p>刻意保留 <code>astrbot/</code> 包目录与 <code>astrbot.api</code> 公共接口，既有插件无需改动即可继续使用；新增能力以独立模块与流水线阶段挂载，不破坏插件契约。</p>
+          <span class="card-tag">契约层不改名</span>
+        </article>
+        <article class="card reveal">
+          <div class="ico ico-violet">§</div>
+          <h3>合规开源</h3>
+          <p>AGPL-3.0-or-later 全文与上游原始版权声明原样保留，NOTICE.md 列明衍生关系与全部修改项；以网络服务对外提供时提供对应源码获取途径。</p>
+          <span class="card-tag">LICENSE · NOTICE.md</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="why">
+    <div class="wrap why-grid">
+      <div>
+        <span class="kicker">POSITIONING</span>
+        <h2>为什么是「能力 fork」，不是又一个换皮</h2>
+        <p>
+          上游是「全平台 × 全模型 × 上千插件」的通用框架，覆盖面极广、迭代很快。
+          拼覆盖面必输，拼垂直深度才有位置。因此路线选的是 <b>B：能力 fork</b>——
+          不动框架架构，只在官方还浅的地方补齐能力，并保持能持续合并上游。
+        </p>
+        <p>
+          第一版聚焦中文社群与私域运营：入群欢迎、问答沉淀、违规提醒、定时播报、多群汇总，
+          这些成套闭环官方没有做；而成本、记忆、权限三类能力是任何场景长期运行都绕不开的地基。
+        </p>
+        <div class="why-note">
+          <b>关系说明</b><br>
+          WonderBot 是 <a href="https://github.com/AstrBotDevs/AstrBot">AstrBot</a>（AGPL-3.0-or-later）的
+          <b>独立衍生作品</b>，基线版本 v4.29.4。由 WonderBot 团队独立维护，
+          与上游官方团队无隶属、背书或代理关系。原始版权与修改清单见仓库 <code>NOTICE.md</code>。
+        </div>
+      </div>
+      <div class="why-list">
+        <div class="why-item"><span>01</span><div><b>不重写核心</b><p>新增模块 + 流水线阶段 + 配置块，改动点清单化，方便按周期合并上游。</p></div></div>
+        <div class="why-item"><span>02</span><div><b>不碰插件契约</b><p><code>astrbot.api</code> 与导入路径保持不变，1000+ 插件不断链。</p></div></div>
+        <div class="why-item"><span>03</span><div><b>不连上游服务</b><p>更新、公告、核心包、WebUI 包与镜像全部指向自有地址或默认禁用。</p></div></div>
+        <div class="why-item"><span>04</span><div><b>不加额外限制</b><p>衍生版继续以 AGPL-3.0-or-later 发布，不对下游附加任何额外条款。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="start">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">QUICK START</span>
+        <h2>三步跑起来</h2>
+        <p>要求 Python 3.12 及以上。源码即发行物，无需预先编译。</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="step-n">1</span><h3>获取源码</h3><p>从 Releases 下载源码安装包并解压，或直接克隆仓库。</p></div>
+        <div class="step"><span class="step-n">2</span><h3>一键安装</h3><p>脚本创建虚拟环境、安装依赖、生成默认配置与单价表。</p></div>
+        <div class="step"><span class="step-n">3</span><h3>填白名单并启动</h3><p>在配置文件写入允许的 QQ 号，然后启动主程序与 WebUI。</p></div>
+      </div>
+      <div class="code-block">
+        <div class="code-head"><span>bash</span><button class="copy-btn" data-copy="code-start">复制命令</button></div>
+        <pre id="code-start"><code># 下载并解压 beta0.1.0 源码安装包
+curl -L -o wonderbot.zip \
+  https://github.com/2997669349awa-blip/wonderBot/releases/download/beta0.1.0/WonderBot-beta0.1.0-source.zip
+unzip wonderbot.zip &amp;&amp; cd WonderBot-beta0.1.0
+
+# 一键安装（Python 3.12+）
+chmod +x install.sh &amp;&amp; ./install.sh
+
+# 填入允许的 QQ 号：data/cmd_config.json
+#   platform_settings.wonderbot_sender_allowlist.qq_ids
+.venv/bin/python main.py</code></pre>
+      </div>
+      <p class="code-foot">完整的环境变量、白名单、成本、记忆与镜像说明见仓库 <a href="https://github.com/2997669349awa-blip/wonderBot/blob/main/WONDERBOT.md">WONDERBOT.md</a>。</p>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="cost">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">COST AUDIT</span>
+        <h2>每一次调用，花多少钱都看得见</h2>
+        <p>成本账本写在本地，单价表单位为元 / 百万 token，可自行按实际合同价修改。</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>模型</th><th>输入</th><th>输出</th><th>耗时</th><th>费用</th></tr></thead>
+          <tbody>
+            <tr><td>01:12:04</td><td>deepseek-chat</td><td>1,200</td><td>320</td><td>1.35s</td><td class="money">¥0.003840</td></tr>
+            <tr><td>01:13:47</td><td>gpt-4o-mini</td><td>800</td><td>210</td><td>0.92s</td><td class="money">¥0.001169</td></tr>
+            <tr><td>01:15:22</td><td>qwen-plus</td><td>2,300</td><td>640</td><td>2.08s</td><td class="money">¥0.011660</td></tr>
+            <tr><td>01:16:09</td><td>unknown-model</td><td>500</td><td>100</td><td>0.74s</td><td class="muted">¥0.000000 · 未配置单价</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="code-block compact">
+        <div class="code-head"><span>bash · 导出审查报表</span><button class="copy-btn" data-copy="code-report">复制命令</button></div>
+        <pre id="code-report"><code>.venv/bin/python scripts/wonderbot_report.py --limit 500
+# 输出 data/cost-report.html（逐次明细 + 按模型汇总）</code></pre>
+      </div>
+      <p class="code-foot">示例数据仅用于说明报表样式，不代表真实调用。未匹配到单价的调用会单独标注，不会静默计入成本。</p>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">ROADMAP</span>
+        <h2>版本路线</h2>
+        <p>当前为首个预发布版本，后续按周期合并上游并逐项补齐能力。</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item current"><span class="tl-ver">beta0.1.0</span><div><b>当前版本 · 可用基线</b><p>品牌与更新源自有化、深黑主题与新图标、成本审查、长期记忆、QQ 发送者白名单、完整文档与合规声明。</p></div></div>
+        <div class="tl-item"><span class="tl-ver">0.2.0</span><div><b>记忆与检索增强</b><p>向量检索、记忆过期与权重衰减、按群的共享记忆空间、WebUI 记忆管理页。</p></div></div>
+        <div class="tl-item"><span class="tl-ver">0.3.0</span><div><b>多 Agent 与权限</b><p>子 Agent 编排与预算上限、工具调用白名单、敏感操作二次确认、审计导出。</p></div></div>
+        <div class="tl-item"><span class="tl-ver">1.0.0</span><div><b>运营闭环</b><p>成套社群运营模板、prompt 版本管理与评测、多群汇总看板。</p></div></div>
+      </div>
+      <p class="code-foot">0.2.0 及之后为规划方向，可能随上游合并节奏调整。</p>
+    </div>
+  </section>
+
+  <section class="section download" id="download">
+    <div class="wrap download-inner">
+      <div>
+        <span class="kicker">DOWNLOAD</span>
+        <h2>WonderBot beta0.1.0</h2>
+        <p>预发布版本，包含完整源码、安装脚本、文档与全部定制能力。两种归档格式内容一致，任选其一。</p>
+        <div class="dl-actions">
+          <a class="btn btn-primary" href="https://github.com/2997669349awa-blip/wonderBot/releases/download/beta0.1.0/WonderBot-beta0.1.0-source.zip">下载 .zip</a>
+          <a class="btn btn-ghost" href="https://github.com/2997669349awa-blip/wonderBot/releases/download/beta0.1.0/WonderBot-beta0.1.0-source.tar.gz">下载 .tar.gz</a>
+        </div>
+        <p class="dl-note">校验文件 <code>SHA256SUMS</code> 随 Release 提供；<a href="https://github.com/2997669349awa-blip/wonderBot/releases/tag/beta0.1.0">查看完整发布说明</a>。</p>
+      </div>
+      <div class="dl-meta">
+        <div><span>版本</span><b>beta0.1.0</b></div>
+        <div><span>Python 包版本</span><b>0.1.0b0</b></div>
+        <div><span>许可证</span><b>AGPL-3.0-or-later</b></div>
+        <div><span>运行环境</span><b>Python 3.12+</b></div>
+        <div><span>发布类型</span><b>Pre-release</b></div>
+        <div><span>基线</span><b>上游 v4.29.4</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap narrow">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2>常见问题</h2>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>和 AstrBot 官方是什么关系？</summary>
+          <p>独立衍生作品，采用 AGPL-3.0-or-later，基线为上游 v4.29.4。原始版权声明与许可证全文原样保留，修改清单写在 <code>NOTICE.md</code>。与上游官方团队没有隶属、背书或代理关系，也不使用其更新服务。</p>
+        </details>
+        <details>
+          <summary>为什么装好后所有 QQ 命令都没反应？</summary>
+          <p>这是刻意的<b>安全默认值</b>：白名单默认开启且 <code>qq_ids</code> 为空，即拒绝全部 QQ 用户命令。在 <code>data/cmd_config.json</code> 的 <code>platform_settings.wonderbot_sender_allowlist.qq_ids</code> 填入允许的 QQ 号后即可生效。被拒绝的事件在进入大模型前终止，不消耗 token。</p>
+        </details>
+        <details>
+          <summary>会不会偷偷上报数据或检测到官方更新？</summary>
+          <p>不会。匿名统计默认关闭；更新检查、核心包与 WebUI 包下载地址都改为自有配置，且未配置发布源时直接禁用，不发起任何网络请求。公告地址也指向本项目官网。</p>
+        </details>
+        <details>
+          <summary>为什么代码里还保留 astrbot 包目录和类名？</summary>
+          <p>那是 <code>astrbot.api</code> 插件契约层。全仓库数百个标识符与上千个第三方插件依赖这些名字，字面全替换会直接让项目跑不起来并和插件生态断链。产品可见层（界面、图标、文档、日志、环境变量、更新源）已全部为 WonderBot；AGPL 也不要求改内部标识符，只要求保留版权声明并标明修改。</p>
+        </details>
+        <details>
+          <summary>可以用于商业项目或收费服务吗？</summary>
+          <p>AGPLv3 允许商业化与收费（部署托管、企业定制、技术支持），但衍生作品必须继续以 AGPL-3.0-or-later 开源，不能改成 MIT、Apache 或闭源，也不能对下游附加「禁止商用」之类的额外限制。若以网络服务形式提供，须依第 13 条主动向使用者提供对应源码的获取途径。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="license">
+    <div class="wrap narrow">
+      <span class="kicker">LICENSE &amp; CREDITS</span>
+      <h2>许可与致谢</h2>
+      <p>
+        WonderBot 以 <b>GNU Affero General Public License v3.0 or later</b> 发布。
+        <code>LICENSE</code> 为上游 AGPL 全文，原样保留；<code>NOTICE.md</code> 列明上游来源、原始版权、
+        采用的基线版本以及本作品所做的全部修改。
+      </p>
+      <p>
+        感谢 <a href="https://github.com/AstrBotDevs/AstrBot">AstrBot</a> 及其贡献者提供的优秀开源底座。
+        本页面中对该名称的引用仅用于说明版权归属与衍生关系，不构成隶属、背书或商标授权。
+      </p>
+      <p class="code-foot">
+        以网络服务形式对外提供时，请依 AGPLv3 第 13 条在服务界面主动提供与所运行版本完整对应的源码获取途径。
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">WonderBot</span>
+      <span class="footer-sub">面向 QQ 群与私域场景的开源智能助手</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/2997669349awa-blip/wonderBot">GitHub 仓库</a>
+      <a href="https://github.com/2997669349awa-blip/wonderBot/releases/tag/beta0.1.0">Releases</a>
+      <a href="https://github.com/2997669349awa-blip/wonderBot/blob/main/WONDERBOT.md">配置文档</a>
+      <a href="https://github.com/2997669349awa-blip/wonderBot/blob/main/NOTICE.md">版权声明</a>
+      <a href="https://github.com/2997669349awa-blip/wonderBot/issues">Issues</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> WonderBot · AGPL-3.0-or-later</span>
+      <span>beta0.1.0 · 独立衍生项目，与上游官方无隶属关系</span>
+    </div>
+  </div>
+</footer>
+
+<script src="./assets/app.js"></script>
+</body>
+</html>
