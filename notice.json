@@ -6,6 +6,14 @@
   "level": "info",
   "notices": [
     {
+      "id": "beta0.1.0-android",
+      "version": "beta0.1.0",
+      "title": "WonderBot for Android beta0.1.0 已发布",
+      "content": "安卓端运行管理器 APK 已发布（独立仓库 WonderBotAndroid，MIT）。可直接安装，属 bootstrap 变体，不含约 1 GiB 运行镜像；完整包构建方式见 BUILD_WONDERBOT.md。",
+      "level": "info",
+      "published_at": "2026-11-15"
+    },
+    {
       "id": "beta0.1.0",
       "version": "beta0.1.0",
       "title": "WonderBot beta0.1.0 已发布",
@@ -18,6 +26,8 @@
     "repository": "https://github.com/2997669349awa-blip/wonderBot",
     "website": "https://2997669349awa-blip.github.io/wonderBot/",
     "releases": "https://github.com/2997669349awa-blip/wonderBot/releases/tag/beta0.1.0",
-    "docs": "https://github.com/2997669349awa-blip/wonderBot/blob/main/WONDERBOT.md"
+    "docs": "https://github.com/2997669349awa-blip/wonderBot/blob/main/WONDERBOT.md",
+    "android_releases": "https://github.com/2997669349awa-blip/WonderBotAndroid/releases/tag/beta0.1.0",
+    "android_repository": "https://github.com/2997669349awa-blip/WonderBotAndroid"
   }
 }
